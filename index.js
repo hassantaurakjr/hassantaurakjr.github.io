@@ -24,7 +24,7 @@ function HelloWorld(voucher) {
         test: voucher
     });
 
-    console.log("Hello");
+    console.log(voucher);
 }
 
 // Function to extract parameter value from URL
