@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js'
+import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,10 +30,10 @@ function SaveVoucher(voucher) {
   const dateId = `${year}-${month}-${day}`;
 
   const reference = ref(db, `data/${dateId}`);
-  
+
   // Assuming voucher is an object with properties 'code' and 'duration'
   set(reference, {
-      [voucher.code]: voucher.duration
+    [voucher.code]: voucher.duration
   });
 
   console.log("Voucher saved successfully.");
@@ -46,11 +47,12 @@ function getParameterValue(parameterName, url) {
 
 // Get the current URL of the page
 var currentUrl = window.location.href;
-// Get the value of the "voucher" parameter
+
+// Get the value of the "voucher" parameter from the current URL
 var voucherValue = getParameterValue("voucher", currentUrl);
 
 const baseUrl = 'https://server9.ictcloud.network/2417d34ce00f5fb86f2de609f5f45787/api/v2';
-const loginUrl = `${baseUrl}/login`;
+const loginUrl = 'https://server9.ictcloud.network/2417d34ce00f5fb86f2de609f5f45787/api/v2/login';
 const getVouchersUrl = `${baseUrl}/hotspot/sites/64ae8d3dfad93d31063d7d3a/vouchers/batch/printUnused`;
 
 // Login request data
@@ -61,21 +63,28 @@ const loginData = {
 
 // Headers for login request
 const loginHeaders = {
-  'Content-Type': 'application/json; charset=UTF-8'
+  'authority': 'server9.ictcloud.network',
+    'accept': 'application/json, text/javascript, */*; q=0.01',
+    'accept-language': 'en-PH,en-US;q=0.9,en;q=0.8,ko;q=0.7',
+    'content-type': 'application/json; charset=UTF-8',
+    'origin': 'https://server9.ictcloud.network',
+    'referer': 'https://server9.ictcloud.network/2417d34ce00f5fb86f2de609f5f45787/login',
+    'sec-ch-ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+    'x-requested-with': 'XMLHttpRequest'
 };
 
 // Headers for authenticated GET request
 let authenticatedHeaders = {
   'Content-Type': 'application/json; charset=UTF-8'
 };
-
 // Step 1: Perform the login request to get the token and cookies
-fetch(loginUrl, {
-  method: 'POST',
-  headers: loginHeaders,
-  body: JSON.stringify(loginData),
-  compress: true
-})
+axios.post(loginUrl, loginData, { loginHeaders })
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
