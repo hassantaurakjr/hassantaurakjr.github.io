@@ -44,8 +44,10 @@ function getParameterValue(parameterName, url) {
   return params.get(parameterName);
 }
 
+// Get the current URL of the page
+var currentUrl = window.location.href;
 // Get the value of the "voucher" parameter
-var voucherValue = getParameterValue("voucher", url);
+var voucherValue = getParameterValue("voucher", currentUrl);
 
 const baseUrl = 'https://server9.ictcloud.network/2417d34ce00f5fb86f2de609f5f45787/api/v2';
 const loginUrl = `${baseUrl}/login`;
