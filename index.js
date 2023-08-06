@@ -4,13 +4,13 @@ import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/10.1.0
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "...",
-  authDomain: "...",
-  databaseURL: "...",
-  projectId: "...",
-  storageBucket: "...",
-  messagingSenderId: "...",
-  appId: "..."
+  apiKey: "AIzaSyAw1kp981u3pq4PTufyGFE4zbizL_4HzXc",
+  authDomain: "wifastconnect.firebaseapp.com",
+  databaseURL: "https://wifastconnect-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "wifastconnect",
+  storageBucket: "wifastconnect.appspot.com",
+  messagingSenderId: "69525369694",
+  appId: "1:69525369694:web:b939b15eba6e83311f55cf"
 };
 
 // Initialize Firebase
