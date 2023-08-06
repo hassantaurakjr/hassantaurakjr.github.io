@@ -1,3 +1,4 @@
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
 import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js'
@@ -18,17 +19,25 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-function HelloWord()
+function HelloWord(voucher)
 {
     const db = getDatabase();
 
     const reference = ref(db, 'data/test1');
     
     set(reference,{
-        test: "Hello World"
+        test: voucher
     });
 
     console.log("Hello");
 }
 
-HelloWord();
+// Function to extract parameter value from URL
+function getParameterValue(parameterName, url) {
+  var params = new URLSearchParams(new URL(url).search);
+  return params.get(parameterName);
+}
+
+// Get the value of the "voucher" parameter
+var voucherValue = getParameterValue("voucher", url);
+HelloWord(voucherValue);
